@@ -7,7 +7,6 @@ export const Search = (props) => {
         height={48}
         viewBox="0 0 48 48"
         fill="none"
-        // {...props}
       >
         <g opacity={0.2}>
           <path

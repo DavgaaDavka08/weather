@@ -1,4 +1,4 @@
-export const Location = (props) => {
+export const Locations = (props) => {
   return (
     <div>
       <svg

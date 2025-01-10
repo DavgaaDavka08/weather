@@ -10,8 +10,79 @@ export default function Home() {
   const [selectedCity, setSelectedCity] = useState("ulaanbaatar");
   const [minGradus, setMinGradus] = useState("");
   const [maxGradus, setMaxGradus] = useState("");
-  const [text, setText] = useState("");
+  const [rightText, setRightText] = useState("");
+  const [Lefttext, setLeftText] = useState("");
+  const [times, setTimes] = useState("");
   const [changeImg, setchangeImg] = useState("");
+  const renderWeatherIcon = () => {
+    let res = Lefttext.toLowerCase();
+    switch (true) {
+      case res.includes("sun"):
+        return <img src="sun.png" alt="a" />;
+      case res.includes("rain"):
+        return <img src="Rain.png" alt="a" />;
+      case res.includes("cloud"):
+        return <img src="Clouds.png" alt="a" />;
+      case res.includes("mist"):
+        return <img src="Clouds.png" alt="a" />;
+      case res.includes("snow"):
+        return <img src="Snow.png" alt="a" />;
+      case res.includes("freez"):
+        return <img src="Snow.png" alt="a" />;
+      case res.includes("wind"):
+        return <img src="Wind.png" alt="a" />;
+      case res.includes("overcast"):
+        return <img src="Wind.png" alt="a" />;
+      case res.includes("thunder"):
+        return <img src="Tunder.png" alt="a" />;
+    }
+  };
+  console.log(renderWeatherIcon);
+  const renderWeatherIcons = () => {
+    let res = rightText.toLowerCase();
+    switch (true) {
+      case res.includes("clear"):
+        return <img src="Moon.png" alt="a" />;
+      case res.includes("rain"):
+        return <img src="MoonRain.png" alt="a" />;
+      case res.includes("cloud"):
+        return <img src="MoonClouds.png" alt="a" />;
+      case res.includes("mist"):
+        return <img src="MoonClouds.png" alt="a" />;
+      case res.includes("snow"):
+        return <img src="MooonSnow.png" alt="a" />;
+      case res.includes("freez"):
+        return <img src="MooonSnow.png" alt="a" />;
+      case res.includes("wind"):
+        return <img src="MoonWind.png" alt="a" />;
+      case res.includes("overcast"):
+        return <img src="MoonWind.png" alt="a" />;
+      case res.includes("thunder"):
+        return <img src="MoonTunder.png" alt="a" />;
+    }
+    //// sain medehgvv bgaa heseg
+  };
+
+  // const [sun, setSun] = useState("sun");
+  // const [moon, setMoon] = useState("");
+  // const setPhoto = () => {
+  //   if (sun === "sun") {
+  //     setSun === "Rain";
+  //   }
+  //   if (sun === "sun") {
+  //     setSun === "Wind";
+  //   }
+  //   if (sun === "sun") {
+  //     setSun === "Tunder";
+  //   }
+  //   if (sun === "sun") {
+  //     setSun === "Clouds";
+  //   }
+  //   if (sun === "sun") {
+  //     setSun === "Snow";
+  //   }
+  // };
+
   useEffect(() => {
     async function getData() {
       const result = await fetch(
@@ -43,11 +114,16 @@ export default function Home() {
     const data = await result.json();
     let incomeMaxCelsius = data.forecast.forecastday[0].day.maxtemp_c;
     let incomeMinCelsius = data.forecast.forecastday[0].day.mintemp_c;
-    let incomeLeftText = data.current.condition.text;
+    let incomeLeftText = data.forecast.forecastday[0].day.condition.text;
+    let incomeRightText = data.forecast.forecastday[0].hour[0].condition.text;
+    console.log(incomeRightText);
+    let incomeTime = data.forecast.forecastday[0].date;
     setMaxGradus(incomeMaxCelsius);
     setMinGradus(incomeMinCelsius);
-    setText(incomeLeftText);
-  }
+    setLeftText(incomeLeftText);
+    setRightText(incomeRightText);
+    setTimes(incomeTime);
+  } ////sain medehgvv baigaa heseg
 
   const addHandler = (city) => {
     setSelectedCity(city);
@@ -56,21 +132,25 @@ export default function Home() {
   };
   return (
     <div className="grid grid-cols-2 h-screen relative overflow-hidden">
-      <Rigthcorner
-        addHandler={addHandler}
-        searched={searched}
-        searchHandler={searchHandler}
-        selectedcity={selectedCity}
-        maxGradus={maxGradus}
-        text={text}
-      />
       <Leftcorner
         addHandler={addHandler}
         searched={searched}
         searchHandler={searchHandler}
         selectedcity={selectedCity}
+        Lefttext={Lefttext}
+        times={times}
+        maxGradus={maxGradus}
+        renderWeatherIcon={renderWeatherIcon}
+      />
+      <Rigthcorner
+        addHandler={addHandler}
+        searched={searched}
+        searchHandler={searchHandler}
+        selectedcity={selectedCity}
         maxGradus={minGradus}
-        text={text}
+        rightText={rightText}
+        times={times}
+        renderWeatherIcons={renderWeatherIcons}
       />
       <Middlebackground />
     </div>
