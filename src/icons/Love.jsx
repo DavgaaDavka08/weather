@@ -1,5 +1,5 @@
-export const Heart = (props) => {
-  <div>
+export const Love = () => {
+  return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width={33}
@@ -16,5 +16,5 @@ export const Heart = (props) => {
         strokeLinejoin="round"
       />
     </svg>
-  </div>;
+  );
 };

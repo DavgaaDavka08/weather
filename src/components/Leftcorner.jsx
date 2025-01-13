@@ -1,6 +1,11 @@
-import { Baishin } from "@/icons/Baishin";
+// import Home from "@/app/page";
+// import { Loc } from "@/icons/Loc";
+// import { Love } from "@/icons/Love";
+// import { Men } from "@/icons/Men";
+import { FakeSun } from "@/icons/FakeSun";
+import { FontLoc } from "@/icons/FontLoc";
 import { Locations } from "@/icons/Locations";
-import { Search } from "@/icons/Search";
+
 export const Leftcorner = ({
   selectedcity,
   maxGradus,
@@ -12,53 +17,68 @@ export const Leftcorner = ({
   addHandler,
 }) => {
   return (
-    <div className=" justify-center items-center flex flex-col  ">
-      <div className="flex flex-col w-[512px]  p-[16px] px-[24px] items-center gap-[16px] rounded-[48px] bg-white shadow-[0px_12px_24px_0px_rgba(0,0,0,0.06)">
-        <div className="absolute left-[250px] top-[20px] z-50 ">
-          <Search />
+    <div className=" justify-center items-center flex flex-col bg-[#F3F4F6] ">
+      <div className="absolute left-[320px] top-[40px] z-50">
+        <div className="relative  gap-[10px] flex items-center w-full font-manrope p-4 pl-12 pr-4 bg-white rounded-lg shadow-md focus:outline-none focus:ring-2 transition-all duration-300 text-black font-manrope text-[32px] font-bold leading-normal">
           <input
             type="text"
-            className="flex items-center flex-1 text-black font-manrope text-[32px] font-bold leading-none outline-none"
+            className=""
             onChange={searchHandler}
-            placeholder="Search location..."
+            placeholder="Search..."
+            style={{
+              backgroundImage: `url('/path-to-search-icon.svg')`, // Optional: if you want to add a custom search icon inside the input
+              backgroundRepeat: "no-repeat",
+              backgroundPosition: "10px center", // Adjust to position icon inside input
+            }}
           />
-          {searched.length > 0 && (
-            <div className="flex w-[512px] py-[16px] flex-col items-start rounded-[24px] bg-white/80 backdrop-blur-[32px] gap-[20px] ">
-              {searched.slice(0, 4).map((city, index) => (
-                <div className="flex" key={index}>
-                  <Locations />
-                  <button
-                    className="flex-1 text-black overflow-hidden text-ellipsis font-manrope text-[28px] font-bold line-clamp-1 "
-                    onClick={() => addHandler(city)}
-                  >
-                    {city}
-                  </button>
-                </div>
-              ))}
-            </div>
-          )}
         </div>
+        {searched.length > 0 && (
+          <div className="flex w-[512px] py-[16px] flex-col items-start rounded-[24px] bg-white/80 backdrop-blur-[32px] gap-[20px] relative top-[10px] left-[5px]">
+            {searched.slice(0, 3).map((city, index) => (
+              <div className="flex" key={index}>
+                <Locations />
+                <button
+                  className="flex-1 text-black overflow-hidden text-ellipsis font-manrope text-[28px] font-bold line-clamp-1 "
+                  onClick={() => addHandler(city)}
+                >
+                  {city}
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
 
-      <div className="tanih w-[886.5px] flex flex-col items-center justify-center ">
-        <div className="w-[414px] h-[828px] rounded-[48px] bg-gray-300 backdrop-blur-sm flex flex-col items-center justify-around ">
+      <div className="tanih w-[886.5px] flex flex-col items-center justify-center  absolute">
+        <div className="relative top-[80px] right-[180px]">
+          <FakeSun />
+        </div>
+
+        <div className="w-[414px] h-[828px] rounded-[48px] bg-[rgba(255,255,255,0.75)] backdrop-blur-md flex flex-col items-center justify-around  relative bottom-[28px]">
           <p>{times}</p>
-          <div>
-            <p className="text-5xl font-serif not-italic font-extrabold leading-normal">
+          <div className="relative">
+            <div className="absolute rigth-[600px] left-[300px]">
+              <FontLoc />
+            </div>
+            <p className="text-5xl font-serif not-italic font-extrabold leading-normal ">
               {selectedcity}
             </p>
           </div>
           <div>{renderWeatherIcon()}</div>
-          <div className="w-[242px] h-[142px]">
-            <p>{maxGradus}°C</p>
-            <p className="text-6 text-blue-500 font-semibold">{Lefttext}</p>
+          <div>
+            <p className="bg-gradient-to-r from-gray-500 via-gray-400 to-gray-600 inline-block text-transparent bg-clip-text text-4xl font-bold w-[350px] h-[197px] font-manrope text-[144px] leading-none">
+              {maxGradus}
+            </p>
           </div>
-          <div className="flex w-[318px] justify-between items-end">
-            <Baishin />
 
-            {/* <Baishin />
-            <Locationsmal />
-            <Heart /> */}
+          <p className="text-[#FF8E27] font-manrope text-2xl font-extrabold leading-none">
+            {Lefttext}
+          </p>
+          <div className="flex w-[318px] justify-between items-end">
+            {/* <Home />
+            <Loc />
+            <Love />
+            <Men /> */}
           </div>
         </div>
       </div>
