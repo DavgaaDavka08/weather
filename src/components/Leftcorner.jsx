@@ -19,19 +19,18 @@ export const Leftcorner = ({
   return (
     <div className=" justify-center items-center flex flex-col bg-[#F3F4F6] ">
       <div className="absolute left-[320px] top-[40px] z-50">
-        <div className="relative  gap-[10px] flex items-center w-full font-manrope p-4 pl-12 pr-4 bg-white rounded-lg shadow-md focus:outline-none focus:ring-2 transition-all duration-300 text-black font-manrope text-[32px] font-bold leading-normal">
-          <input
-            type="text"
-            className=""
-            onChange={searchHandler}
-            placeholder="Search..."
-            style={{
-              backgroundImage: `url('/path-to-search-icon.svg')`, // Optional: if you want to add a custom search icon inside the input
-              backgroundRepeat: "no-repeat",
-              backgroundPosition: "10px center", // Adjust to position icon inside input
-            }}
-          />
-        </div>
+        <input
+          type="text"
+          className="relative  gap-[10px] flex items-center w-full font-manrope p-4 pl-12 pr-4 bg-white rounded-lg shadow-md focus:outline-none focus:ring-2 transition-all duration-300 text-black font-manrope text-[32px] font-bold leading-normal"
+          onChange={searchHandler}
+          placeholder="Search..."
+          style={{
+            backgroundImage: `url('/path-to-search-icon.svg')`, // Optional: if you want to add a custom search icon inside the input
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "10px center", // Adjust to position icon inside input
+          }}
+        />
+
         {searched.length > 0 && (
           <div className="flex w-[512px] py-[16px] flex-col items-start rounded-[24px] bg-white/80 backdrop-blur-[32px] gap-[20px] relative top-[10px] left-[5px]">
             {searched.slice(0, 3).map((city, index) => (
